@@ -1,3 +1,13 @@
+namespace SpriteKind {
+    export const Log = SpriteKind.create()
+}
+controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
+    let mySprite2: Sprite = null
+    mySprite2.setVelocity(0, -100)
+})
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Projectile, function (sprite, otherSprite) {
+    game.gameOver(false)
+})
 let mySprite = sprites.create(img`
     . . . . . . . . . . b 5 b . . . 
     . . . . . . . . . b 5 b . . . . 
@@ -16,8 +26,7 @@ let mySprite = sprites.create(img`
     . . . c c c c c c c c b b . . . 
     . . . . . . . . . . . . . . . . 
     `, SpriteKind.Player)
-music.play(music.stringPlayable("D E F G A A A C5 ", 120), music.PlaybackMode.UntilDone)
-let mySprite2 = sprites.create(img`
+mySprite = sprites.create(img`
     .....6eeeeeeeeeece6.....
     ....6776eeeeeeeee676....
     ...6776666eeee6766776...
@@ -35,6 +44,26 @@ let mySprite2 = sprites.create(img`
     .......beeeeeeeeb.......
     ........beeeeeeb........
     `, SpriteKind.Player)
+mySprite.ay = 350
 game.onUpdateInterval(1000, function () {
-	
+    mySprite = sprites.createProjectileFromSide(img`
+        . . . . . . . . . . b 5 b . . . 
+        . . . . . . . . . b 5 b . . . . 
+        . . . . . . b b b b b b . . . . 
+        . . . . . b b 5 5 5 5 5 b . . . 
+        . . . . b b 5 d 1 f 5 5 d f . . 
+        . . . . b 5 5 1 f f 5 d 4 c . . 
+        . . . . b 5 5 d f b d d 4 4 . . 
+        . b b b d 5 5 5 5 5 4 4 4 4 4 b 
+        b d d d b b d 5 5 4 4 4 4 4 b . 
+        b b d 5 5 5 b 5 5 5 5 5 5 b . . 
+        c d c 5 5 5 5 d 5 5 5 5 5 5 b . 
+        c b d c d 5 5 b 5 5 5 5 5 5 b . 
+        . c d d c c b d 5 5 5 5 5 d b . 
+        . . c b d d d d d 5 5 5 b b . . 
+        . . . c c c c c c c c b b . . . 
+        . . . . . . . . . . . . . . . . 
+        `, -70, 0)
+    mySprite.y = 110
+    info.changeScoreBy(1)
 })
